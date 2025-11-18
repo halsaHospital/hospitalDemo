@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Approval_Status__c</fullName>
+        <externalId>false</externalId>
+        <formula>TEXT( Tour_Plans__r.Approval_Status__c )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Approval Status</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Check_in_Day__c</fullName>
+        <externalId>false</externalId>
+        <formula>CASE(
+    WEEKDAY(DATEVALUE( CheckIn_CMV__Check_in_Date_Time__c )),
+    1, &quot;Sunday&quot;,
+    2, &quot;Monday&quot;,
+    3, &quot;Tuesday&quot;,
+    4, &quot;Wednesday&quot;,
+    5, &quot;Thursday&quot;,
+    6, &quot;Friday&quot;,
+    7, &quot;Saturday&quot;,
+    &quot;-&quot;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Check in Day</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Checked_In_Completed__c</fullName>
+        <formula>NOT(ISBLANK(CheckIn_CMV__Check_in_Date_Time__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Checked In Completed</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Combined_Date_and_Visit__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    NOT(ISBLANK(CheckIn_CMV__Account__r.Id)), CheckIn_CMV__Account__r.Name,
+    IF(NOT(ISBLANK(CheckIn_CMV__Lead__r.Id)), CheckIn_CMV__Lead__r.LastName,
+    IF(NOT(ISBLANK(CheckIn_CMV__Opportunity__r.Id)), CheckIn_CMV__Opportunity__r.Name,
+    &quot;No Name&quot;
+))) &amp; &quot; || &quot; &amp; 
+TEXT(DAY(Planned_Date__c)) &amp; &quot;-&quot; &amp; TEXT(MONTH(Planned_Date__c)) &amp; &quot;-&quot; &amp; TEXT(YEAR(Planned_Date__c))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Combined Date and Visit</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Comorbidities__c</fullName>
+        <label>Comorbidities</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Hyper-tension</fullName>
+                    <default>false</default>
+                    <label>Hyper-tension</label>
+                </value>
+                <value>
+                    <fullName>Diabetic</fullName>
+                    <default>false</default>
+                    <label>Diabetic</label>
+                </value>
+                <value>
+                    <fullName>Heart-Disease</fullName>
+                    <default>false</default>
+                    <label>Heart-Disease</label>
+                </value>
+                <value>
+                    <fullName>Nerve Problem</fullName>
+                    <default>false</default>
+                    <label>Nerve Problem</label>
+                </value>
+                <value>
+                    <fullName>Psychiatric disorder</fullName>
+                    <default>false</default>
+                    <label>Psychiatric disorder</label>
+                </value>
+                <value>
+                    <fullName>Gynocological Issue</fullName>
+                    <default>false</default>
+                    <label>Gynocological Issue</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+        <visibleLines>4</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Doctor_s_Note__c</fullName>
+        <label>Doctor&apos;s Note</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Need to Re-visit</fullName>
+                    <default>false</default>
+                    <label>Need to Re-visit</label>
+                </value>
+                <value>
+                    <fullName>Need to diagnosys</fullName>
+                    <default>false</default>
+                    <label>Need to diagnosys</label>
+                </value>
+                <value>
+                    <fullName>Refer to other segment</fullName>
+                    <default>false</default>
+                    <label>Refer to other segment</label>
+                </value>
+                <value>
+                    <fullName>Refer to immediate admission</fullName>
+                    <default>false</default>
+                    <label>Refer to immediate admission</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Iris__c</fullName>
+        <label>Patient Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Outdoor Patient</fullName>
+                    <default>false</default>
+                    <label>Outdoor Patient</label>
+                </value>
+                <value>
+                    <fullName>Indoor Patient</fullName>
+                    <default>false</default>
+                    <label>Indoor Patient</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Outcome_of_Visit__c</fullName>
+        <label>Outcome of Visit</label>
+        <length>32768</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Planned_Date__c</fullName>
+        <label>Planned Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Purpose_of_Visit_Fill_before_Tour__c</fullName>
+        <label>Purpose of Visit (Fill before Tour)</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Tour_Plans__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <label>Tour Plans</label>
+        <referenceTo>Tour_Plans__c</referenceTo>
+        <relationshipLabel>Visits</relationshipLabel>
+        <relationshipName>Visits</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Visit_Name__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(
+    &quot;/&quot; &amp; Id,
+    IF(
+        NOT(ISBLANK( CheckIn_CMV__Account__r.Id )),
+         CheckIn_CMV__Account__r.Name ,
+        &quot;View Record&quot;
+    ),
+    &quot;_blank&quot;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visit Name</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Visit_Type__c</fullName>
+        <label>Visit Type</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Planned</fullName>
+                    <default>false</default>
+                    <label>Planned</label>
+                </value>
+                <value>
+                    <fullName>Unplanned</fullName>
+                    <default>false</default>
+                    <label>Unplanned</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Visited__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(ISBLANK( CheckIn_CMV__Check_in_Date_Time__c ),
+   IMAGE(&quot;/resource/CheckIn_CMV__error_icon_non_compliant&quot;, &quot;Error red X&quot;, 25, 25),
+
+IF(ISBLANK( CheckIn_CMV__Check_in_Date_Time__c ) &amp;&amp; Planned_Date__c &lt; TODAY() ,
+   IMAGE(&quot;/resource/CheckIn_CMV__error_icon_non_compliant&quot;, &quot;Error red X&quot;, 25, 25),
+     
+        IMAGE(&quot;/resource/CheckIn_CMV__success_icon_compliant&quot;, &quot;Green Check&quot;, 25, 25) ) )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Visited</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>
